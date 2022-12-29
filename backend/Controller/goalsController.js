@@ -22,6 +22,16 @@ const setGoals = asyncHandler( async (req, res) =>{
     console.log(req.body)
 })
 
+const  getGoalById = asyncHandler(async (req, res) =>{
+    const goal = await Goal.findById(req.params.id)
+    if(!goal){
+        res.status(400)
+        throw new Error("Goals not found ")
+    }
+    
+    res.json(goal)
+})
+
 const  updateGoals = asyncHandler(async (req, res) =>{
     const goal = await Goal.findById(req.params.id)
     if(!goal){
@@ -49,4 +59,5 @@ module.exports ={
     setGoals,
     updateGoals,
     deleteGoals,
+    getGoalById,
 }
